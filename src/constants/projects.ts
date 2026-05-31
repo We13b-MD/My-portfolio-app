@@ -1,0 +1,125 @@
+export interface Project {
+  id: string;
+  title: string;
+  category: 'web-app' | 'rich-media';
+  subCategory?: string; // DCO, Gamified, Expandable, etc.
+  description: Record<'en' | 'es' | 'fr', string>;
+  tags: string[];
+  demoType: 'sandbox' | 'iframe' | 'external';
+  demoUrl?: string;
+  features: Record<'en' | 'es' | 'fr', string[]>;
+}
+
+export const projectsData: Project[] = [
+  {
+    id: "clock-in",
+    title: "Automated Clock-In System",
+    category: "web-app",
+    subCategory: "Productivity SaaS",
+    description: {
+      en: "A robust employee attendance and productivity tracker featuring instant clock-in/out, live shift duration calculations, break tracking, and an analytics dashboard reporting weekly hours.",
+      es: "Un sistema de registro de asistencia y productividad para empleados que ofrece fichaje de entrada/salida instantáneo, cálculo de duración de turnos en tiempo real, registro de pausas y un panel de análisis.",
+      fr: "Un système robuste de suivi des présences et de la productivité des employés, comprenant le pointage instantané, le calcul en direct de la durée des quarts de travail, le suivi des pauses et un tableau de bord analytique."
+    },
+    tags: ["React", "TypeScript", "Vanilla CSS", "LocalStorage", "Analytics"],
+    demoType: "iframe",
+    demoUrl: "https://we13b-md.github.io/clockIn/dashboard.html",
+    features: {
+      en: ["Geofence simulation", "Break time tracker", "Visual weekly charts", "CSV report exporter"],
+      es: ["Simulación de geovalla", "Seguimiento de pausas", "Gráficos semanales visuales", "Exportador a CSV"],
+      fr: ["Simulation de géorepérage", "Suivi des temps de pause", "Graphiques hebdomadaires", "Exportation de rapports CSV"]
+    }
+  },
+  {
+    id: "bank-alert",
+    title: "Fake Bank Alert Detector",
+    category: "web-app",
+    subCategory: "Cybersecurity Utility",
+    description: {
+      en: "An intelligent security utility that parses banking transaction notification text, headers, and metadata to analyze authenticity, flagging suspicious text patterns, unverified domains, and financial scam indicators.",
+      es: "Una herramienta inteligente de seguridad que analiza el texto y metadatos de notificaciones bancarias para verificar su autenticidad, detectando patrones de texto sospechosos y estafas financieras.",
+      fr: "Un utilitaire de sécurité intelligent qui analyse le texte, les en-têtes et les métadonnées des notifications bancaires pour vérifier leur authenticité, en signalant les modèles de texte suspects."
+    },
+    tags: ["React", "TypeScript", "Phishing Analyzer", "Pattern Matching", "Security Sandbox"],
+    demoType: "iframe",
+    demoUrl: "https://fake-bank-alert-app-f4fs.vercel.app/",
+    features: {
+      en: ["Scam heuristics analyzer", "Real-time header scanning", "Risk percentage indicator", "Safety recommendation tips"],
+      es: ["Analizador heurístico de estafas", "Escaneo de encabezados en tiempo real", "Indicador de porcentaje de riesgo", "Recomendaciones de seguridad"],
+      fr: ["Analyse heuristique des arnaques", "Analyse des en-têtes en temps réel", "Indicateur de pourcentage de risque", "Conseils de sécurité"]
+    }
+  },
+  {
+    id: "rich-media-nike-slider",
+    title: "Nike Boots Interactive Slider Ad",
+    category: "rich-media",
+    subCategory: "Gamified Ads",
+    description: {
+      en: "An interactive high-impact rich media ad banner for Nike boots. It displays a legacy boot model initially, prompting user interaction via a slide trigger that smoothly sweeps to reveal the futuristic new boot, accompanied by a dynamic background campaign video GIF.",
+      es: "Un banner publicitario interactivo de Rich Media para botas Nike. Muestra inicialmente un modelo de bota clásico, invitando al usuario a deslizar para revelar la nueva bota futurista y un GIF de campaña dinámico.",
+      fr: "Une bannière publicitaire Rich Media interactive pour les chaussures Nike. Elle affiche un modèle classique au début, incitant l'utilisateur à faire glisser pour révéler le nouveau modèle futuriste."
+    },
+    tags: ["HTML5 Banner", "Slider UI", "GIF Campaign", "AdTech Rich Media", "Micro-Interactions"],
+    demoType: "iframe",
+    demoUrl: "https://we13b-md.github.io/Nikeboots-slidr/",
+    features: {
+      en: ["Before/after sweep animation", "High-impact visual transition", "Interactive slide handle", "Action branding landing page link"],
+      es: ["Animación de barrido antes/después", "Transición visual de alto impacto", "Control deslizante interactivo", "Enlace promocional de marca"],
+      fr: ["Animation de balayage avant/après", "Transition visuelle à fort impact", "Poignée glissière interactive", "Lien de redirection de marque"]
+    }
+  },
+  {
+    id: "rich-media-dco",
+    title: "Dynamic Creative Optimization (DCO) Ad Banner",
+    category: "rich-media",
+    subCategory: "DCO Ads",
+    description: {
+      en: "A cutting-edge interactive advertising banner designed for marketing campaigns. It dynamically updates messaging, images, call-to-actions, and background themes in real-time based on target location, current weather, and local time.",
+      es: "Un banner publicitario interactivo de última generación. Actualiza dinámicamente mensajes, imágenes y temas de fondo en tiempo real según la ubicación del objetivo, el clima y la hora local.",
+      fr: "Une bannière publicitaire interactive de pointe. Elle met à jour dynamiquement les messages, les images et les thèmes en temps réel en fonction de l'emplacement cible, de la météo et de l'heure locale."
+    },
+    tags: ["HTML5", "Vite", "DCO Engine", "GeoIP Simulation", "AdTech API"],
+    demoType: "sandbox",
+    features: {
+      en: ["Dynamic visual adaptation", "Simulated contextual triggers", "Weather-based custom product display", "Advanced conversion telemetry"],
+      es: ["Adaptación visual dinámica", "Disparadores contextuales simulados", "Productos basados en el clima", "Telemetría avanzada de conversión"],
+      fr: ["Adaptation visuelle dynamique", "Déclencheurs contextuels simulés", "Affichage de produits selon la météo", "Télémétrie de conversion avancée"]
+    }
+  },
+  {
+    id: "rich-media-game",
+    title: "Interactive Gamified 'Catch-the-Deal' Banner",
+    category: "rich-media",
+    subCategory: "Gamified Ads",
+    description: {
+      en: "A playable ad banner that increases viewer engagement by 400% through an embedded interactive mini-game. Catch falling discount coupons inside the shopping basket while dodging scam bubbles, triggering a conversion coupon at the end.",
+      es: "Un banner publicitario jugable que aumenta el compromiso del espectador en un 400% mediante un minijuego interactivo. Atrapa cupones de descuento mientras esquivas burbujas de estafa.",
+      fr: "Une bannière publicitaire jouable qui augmente l'engagement des spectateurs de 400 % grâce à un mini-jeu interactives. Attrapez les coupons de réduction tout en évitant les bulles d'arnaque."
+    },
+    tags: ["2D Game Engine", "Canvas/CSS", "High engagement Creative", "Coupon Rewards", "Ad Gamification"],
+    demoType: "sandbox",
+    features: {
+      en: ["Addictive mini-game loop", "Smooth frame rendering", "Promo code award screen", "Click-to-redeem conversion hook"],
+      es: ["Bucle de minijuego adictivo", "Renderizado de fotogramas suave", "Pantalla de entrega de código promocional", "Gancho de conversión al hacer clic"],
+      fr: ["Boucle de mini-jeu addictive", "Rendu fluide des images", "Écran de remise de code promo", "Bouton de conversion en un clic"]
+    }
+  },
+  {
+    id: "rich-media-expand",
+    title: "High-Impact Expandable Video Ad Unit",
+    category: "rich-media",
+    subCategory: "Expandable Ads",
+    description: {
+      en: "A premium rich media banner ad that starts as a standard 300x250 inline ad, but smoothly expands to a high-impact 600x500 overlay upon hover, featuring an interactive video player, customized hot-spots, and dynamic product selector.",
+      es: "Un banner de Rich Media premium que comienza como un anuncio en línea estándar de 300x250, pero se expande suavemente a una superposición de 600x500 al pasar el cursor, con reproductor de video y selector de productos.",
+      fr: "Une bannière Rich Media haut de gamme qui commence comme une publicité en ligne standard de 300x250, mais s'agrandit en douceur vers une superposition de 600x500 au survol, avec lecteur vidéo interactif."
+    },
+    tags: ["CSS Expand Keyframes", "Video Hotspots", "Ad Banner Standards", "Overlay Analytics"],
+    demoType: "sandbox",
+    features: {
+      en: ["Liquid transition effect", "Interactive video hotspots", "Swipeable dynamic product carousel", "Close button auto-retract safeguards"],
+      es: ["Efecto de transición fluida", "Puntos calientes en video interactivo", "carrusel dinámico de productos", "Salvaguardas de cierre automático"],
+      fr: ["Effet de transition fluide", "Points chauds vidéo interactifs", "Carrousel de produits dynamique", "Sécurité de fermeture automatique"]
+    }
+  }
+];

@@ -1,0 +1,519 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   1. DESIGN SYSTEM VARIABLES & THEMES
+   ========================================== */
+:root {
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* HSL Color Tokens - Light Mode (Soft Green/Grey) */
+  --bg-hsl: 140, 20%, 98%;
+  --bg-surface-hsl: 140, 24%, 95%;
+  --text-hsl: 224, 71%, 4%;
+  --text-muted-hsl: 220, 9%, 40%;
+  
+  --accent-hsl: 142, 72%, 40%; /* Emerald Green */
+  --accent-secondary-hsl: 160, 84%, 35%; 
+  --border-hsl: 140, 10%, 88%;
+  
+  --glow-opacity: 0.08;
+  --card-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.02);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-blur: 12px;
+  
+  --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+  /* HSL Color Tokens - Pitch Black Emerald */
+  --bg-hsl: 0, 0%, 0%; /* Absolute Pitch Black */
+  --bg-surface-hsl: 140, 10%, 4%; /* Near black with ultra-subtle green tint */
+  --text-hsl: 0, 0%, 95%;
+  --text-muted-hsl: 215, 12%, 60%;
+  
+  --accent-hsl: 142, 70%, 45%; /* Electric Emerald Green */
+  --accent-secondary-hsl: 155, 80%, 40%;
+  --border-hsl: 142, 10%, 12%;
+  
+  --glow-opacity: 0.25;
+  --card-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.7), 0 4px 15px -2px rgba(16, 185, 129, 0.08);
+  --glass-bg: rgba(6, 6, 6, 0.7);
+  --glass-blur: 16px;
+}
+
+/* Base derived color variables for quick use */
+:root {
+  --bg-color: hsl(var(--bg-hsl));
+  --bg-surface: hsl(var(--bg-surface-hsl));
+  --text-color: hsl(var(--text-hsl));
+  --text-muted: hsl(var(--text-muted-hsl));
+  
+  --accent: hsl(var(--accent-hsl));
+  --accent-secondary: hsl(var(--accent-secondary-hsl));
+  --border-color: hsl(var(--border-hsl));
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+/* ==========================================
+   2. BASE RESET & GENERAL STYLES
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color var(--transition-speed) ease, 
+              color var(--transition-speed) ease, 
+              border-color var(--transition-speed) ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  outline: none;
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection style */
+::selection {
+  background-color: hsla(var(--accent-hsl), 0.25);
+  color: var(--accent);
+}
+
+/* ==========================================
+   3. LAYOUT STRUCTURE
+   ========================================== */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  gap: 60px;
+  width: 100%;
+}
+
+/* Left Sidebar Profile */
+.sidebar-pane {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 0;
+  z-index: 10;
+}
+
+/* Right Scrollable Content Pane */
+.content-pane {
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+/* Section styling */
+.section {
+  scroll-margin-top: 60px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  font-weight: 800;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section:hover .section-title::after {
+  width: 70px;
+}
+
+/* ==========================================
+   4. PREMIUM UTILITIES & MICRO-ANIMATIONS
+   ========================================== */
+
+/* Grid Overlay Background (Reactbits inspired) */
+.grid-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.grid-bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, hsla(var(--accent-hsl), 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, hsla(var(--accent-hsl), 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle 60vw at 50% 50%, black, transparent 80%);
+}
+
+.grid-bg-glow {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, hsla(var(--accent-hsl), var(--glow-opacity)) 0%, transparent 70%);
+  top: -10vw;
+  right: -10vw;
+  filter: blur(80px);
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.grid-bg-glow-2 {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, hsla(var(--accent-secondary-hsl), var(--glow-opacity)) 0%, transparent 70%);
+  bottom: -10vw;
+  left: -10vw;
+  filter: blur(80px);
+  animation: float 25s infinite alternate-reverse ease-in-out;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  transition: border-color var(--transition-speed), 
+              background-color var(--transition-speed),
+              box-shadow var(--transition-speed),
+              transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glass-card:hover {
+  border-color: hsla(var(--accent-hsl), 0.3);
+  box-shadow: 0 10px 40px -8px rgba(0,0,0,0.8), 0 0 15px -3px hsla(var(--accent-hsl), 0.15);
+}
+
+/* Shiny Hover Card (Reactbits Glow Card) */
+.glow-card-container {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+}
+
+.glow-card-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    hsla(var(--accent-hsl), 0.15),
+    transparent 80%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glow-card-container:hover::before {
+  opacity: 1;
+}
+
+/* Premium Buttons & Magnetic Feel */
+.btn-emerald {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px 0 hsla(var(--accent-hsl), 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.btn-emerald::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.btn-emerald:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 6px 20px 0 hsla(var(--accent-hsl), 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-emerald:hover::after {
+  left: 100%;
+}
+
+.btn-emerald:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  background: hsla(var(--accent-hsl), 0.05);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Floating WhatsApp FAB */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366; /* WhatsApp official green */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  z-index: 99;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.15) rotate(8deg);
+  background: #128c7e;
+  box-shadow: 0 10px 35px rgba(18, 140, 126, 0.6);
+}
+
+.whatsapp-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.6;
+  z-index: -1;
+  animation: pulseFAB 2s infinite;
+}
+
+/* Interactive Tabs */
+.tabs-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 8px 20px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px hsla(var(--accent-hsl), 0.3);
+}
+
+/* Category Badge styles */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-emerald {
+  background-color: hsla(142, 70%, 45%, 0.15);
+  color: var(--accent);
+}
+
+.badge-blue {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+/* ==========================================
+   5. COMPONENT-SPECIFIC ANIMATIONS
+   ========================================== */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulseFAB {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Text slide up animation */
+.text-slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+/* ==========================================
+   6. RESPONSIVE DESIGN MEDIA QUERIES
+   ========================================== */
+@media (max-width: 1024px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+  
+  .sidebar-pane {
+    position: relative;
+    height: auto;
+    padding: 40px 0 20px 0;
+    gap: 30px;
+  }
+  
+  .content-pane {
+    padding: 20px 0 60px 0;
+    gap: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .btn-emerald, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .whatsapp-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+}
