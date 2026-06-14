@@ -14,6 +14,7 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
 
   const [viewMode, setViewMode] = useState<'live' | 'guided'>(demoUrl ? 'live' : 'guided');
   const [iframeLoading, setIframeLoading] = useState(true);
+  const [isExpandedMode, setIsExpandedMode] = useState(false);
 
   useEffect(() => {
     setViewMode(demoUrl ? 'live' : 'guided');
@@ -49,7 +50,9 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
           justifyContent: 'space-between',
           alignItems: 'center',
           borderBottom: '1px solid var(--border-color)',
-          paddingBottom: '16px'
+          paddingBottom: '16px',
+          gap: '16px',
+          flexWrap: 'wrap'
         }}
       >
         <div>
@@ -68,20 +71,50 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
             {projectId === 'rich-media-expand' && (language === 'en' ? 'Expandable Ad Sandbox' : language === 'es' ? 'Banner Expandible' : 'Bannière Extensible')}
           </h3>
         </div>
-        <button
-          onClick={onClose}
-          className="btn-secondary"
-          style={{ padding: '8px 16px', fontSize: '0.85rem' }}
-        >
-          {language === 'en' ? '← Back' : language === 'es' ? '← Volver' : '← Retour'}
-        </button>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {demoUrl && (
+            <a
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-emerald"
+              style={{
+                padding: '8px 16px',
+                fontSize: '0.85rem',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <span>🌐</span> {language === 'en' ? 'Open Full Site ↗' : language === 'es' ? 'Ver Sitio Completo ↗' : 'Site Complet ↗'}
+            </a>
+          )}
+          <button
+            onClick={() => setIsExpandedMode(!isExpandedMode)}
+            className="btn-secondary"
+            style={{ padding: '8px 16px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}
+          >
+            <span>{isExpandedMode ? '📱' : '🖥️'}</span>
+            {isExpandedMode 
+              ? (language === 'en' ? 'Split View' : language === 'es' ? 'Vista Dividida' : 'Vue Split') 
+              : (language === 'en' ? 'Full Width' : language === 'es' ? 'Ancho Completo' : 'Plein Écran')}
+          </button>
+          <button
+            onClick={onClose}
+            className="btn-secondary"
+            style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+          >
+            {language === 'en' ? '← Back' : language === 'es' ? '← Volver' : '← Retour'}
+          </button>
+        </div>
       </div>
 
       {/* Simulator Device Render */}
       <div 
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr minmax(280px, 340px)',
+          gridTemplateColumns: isExpandedMode ? '1fr' : '1fr minmax(280px, 340px)',
           gap: '30px',
           alignItems: 'start'
         }}
@@ -342,72 +375,74 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
         </div>
 
         {/* Instructions panel */}
-        <div 
-          style={{
-            background: 'var(--glass-bg)',
-            border: '1px solid var(--border-color)',
-            borderRadius: 'var(--radius-md)',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px'
-          }}
-        >
-          <h4 style={{ fontSize: '1.1rem', color: 'var(--accent)', fontWeight: 700 }}>
-            {language === 'en' ? 'Interactive Guide' : language === 'es' ? 'Guía Interactiva' : 'Guide Interactif'}
-          </h4>
-          
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {projectId === 'clock-in' && (
-              <>
-                <p><strong>Attendance SaaS Simulation:</strong></p>
-                <p>1. Click <strong>"Clock In"</strong> to launch your virtual shift.</p>
-                <p>2. Toggle <strong>"Take Break"</strong> to pause tracking and log break intervals.</p>
-                <p>3. Click <strong>"Clock Out"</strong> to log the shift to your local table records.</p>
-              </>
-            )}
-            {projectId === 'bank-alert' && (
-              <>
-                <p><strong>Phishing Scanner Simulation:</strong></p>
-                <p>1. Select a mock message template on the right panel.</p>
-                <p>2. Click <strong>"Scan Notification"</strong> to run a heuristics check.</p>
-                <p>3. Review the green/red fraud indicator and warning tags.</p>
-              </>
-            )}
-            {projectId === 'rich-media-dco' && (
-              <>
-                <p><strong>DCO Campaign Showcase:</strong></p>
-                <p>1. Change parameters on the right (City, Weather, Time).</p>
-                <p>2. Observe how the banner's background, headline, copy, and product match the conditions immediately.</p>
-                <p>3. That is Dynamic Creative Optimization!</p>
-              </>
-            )}
-            {projectId === 'rich-media-game' && (
-              <>
-                <p><strong>Gamified Playable Banner:</strong></p>
-                <p>1. Click <strong>"Start Game"</strong>. Use the buttons on screen to move the cart.</p>
-                <p>2. Catch green discount bubbles (+1 Point) and avoid red hazard fraud bubbles (scams).</p>
-                <p>3. Reach 5 points to unlock a custom promocode discount reward!</p>
-              </>
-            )}
-            {projectId === 'rich-media-expand' && (
-              <>
-                <p><strong>Responsive Liquid Expand Unit:</strong></p>
-                <p>1. Hover or click <strong>"Expand Banner"</strong> on the mockup screen.</p>
-                <p>2. The banner transforms, revealing an interactive video player overlay and swipeable product cards.</p>
-                <p>3. Click "Close [X]" to retract.</p>
-              </>
-            )}
-            {projectId === 'rich-media-nike-slider' && (
-              <>
-                <p><strong>Interactive Slider Campaign:</strong></p>
-                <p>1. Interact with the slide bar inside the banner to swipe between the **classic** and **futuristic** Nike boots.</p>
-                <p>2. Watch the background campaign transition into a dynamic athletic sports field environment with a Nike campaign GIF.</p>
-                <p>3. Experience how interactive micro-interactions increase brand recall and engagement over static ads!</p>
-              </>
-            )}
+        {!isExpandedMode && (
+          <div 
+            style={{
+              background: 'var(--glass-bg)',
+              border: '1px solid var(--border-color)',
+              borderRadius: 'var(--radius-md)',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}
+          >
+            <h4 style={{ fontSize: '1.1rem', color: 'var(--accent)', fontWeight: 700 }}>
+              {language === 'en' ? 'Interactive Guide' : language === 'es' ? 'Guía Interactiva' : 'Guide Interactif'}
+            </h4>
+            
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {projectId === 'clock-in' && (
+                <>
+                  <p><strong>Attendance SaaS Simulation:</strong></p>
+                  <p>1. Click <strong>"Clock In"</strong> to launch your virtual shift.</p>
+                  <p>2. Toggle <strong>"Take Break"</strong> to pause tracking and log break intervals.</p>
+                  <p>3. Click <strong>"Clock Out"</strong> to log the shift to your local table records.</p>
+                </>
+              )}
+              {projectId === 'bank-alert' && (
+                <>
+                  <p><strong>Phishing Scanner Simulation:</strong></p>
+                  <p>1. Select a mock message template on the right panel.</p>
+                  <p>2. Click <strong>"Scan Notification"</strong> to run a heuristics check.</p>
+                  <p>3. Review the green/red fraud indicator and warning tags.</p>
+                </>
+              )}
+              {projectId === 'rich-media-dco' && (
+                <>
+                  <p><strong>DCO Campaign Showcase:</strong></p>
+                  <p>1. Change parameters on the right (City, Weather, Time).</p>
+                  <p>2. Observe how the banner's background, headline, copy, and product match the conditions immediately.</p>
+                  <p>3. That is Dynamic Creative Optimization!</p>
+                </>
+              )}
+              {projectId === 'rich-media-game' && (
+                <>
+                  <p><strong>Gamified Playable Banner:</strong></p>
+                  <p>1. Click <strong>"Start Game"</strong>. Use the buttons on screen to move the cart.</p>
+                  <p>2. Catch green discount bubbles (+1 Point) and avoid red hazard fraud bubbles (scams).</p>
+                  <p>3. Reach 5 points to unlock a custom promocode discount reward!</p>
+                </>
+              )}
+              {projectId === 'rich-media-expand' && (
+                <>
+                  <p><strong>Responsive Liquid Expand Unit:</strong></p>
+                  <p>1. Hover or click <strong>"Expand Banner"</strong> on the mockup screen.</p>
+                  <p>2. The banner transforms, revealing an interactive video player overlay and swipeable product cards.</p>
+                  <p>3. Click "Close [X]" to retract.</p>
+                </>
+              )}
+              {projectId === 'rich-media-nike-slider' && (
+                <>
+                  <p><strong>Interactive Slider Campaign:</strong></p>
+                  <p>1. Interact with the slide bar inside the banner to swipe between the **classic** and **futuristic** Nike boots.</p>
+                  <p>2. Watch the background campaign transition into a dynamic athletic sports field environment with a Nike campaign GIF.</p>
+                  <p>3. Experience how interactive micro-interactions increase brand recall and engagement over static ads!</p>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
