@@ -50,6 +50,25 @@ export const projectsData: Project[] = [
     }
   },
   {
+    id: "conference-ticket-generator",
+    title: "Conference Ticket Generator",
+    category: "web-app",
+    subCategory: "SaaS Utility",
+    description: {
+      en: "A dynamic, high-fidelity ticket generation application that lets users customize, live-preview, and generate digital entrance tickets, featuring profile image upload, drag-and-drop avatar handling, and instant PDF ticket download options.",
+      es: "Un generador de entradas para conferencias dinámico de alta fidelidad que permite personalizar, previsualizar en tiempo real y generar entradas digitales, con carga de avatar y descarga de PDF instantánea.",
+      fr: "Un générateur dynamique de billets de conférence permettant de personnaliser, de prévisualiser en direct et de générer des billets d'entrée numériques avec téléchargement d'images et export PDF."
+    },
+    tags: ["React", "TypeScript", "Tailwind CSS", "PDF Generation", "Cloudinary", "Vercel"],
+    demoType: "iframe",
+    demoUrl: "https://client-red-mu-30.vercel.app/",
+    features: {
+      en: ["Real-time ticket live preview", "Drag-and-drop avatar image upload", "Form field input validation", "Clean printable PDF/downloadable ticket"],
+      es: ["Vista previa de entradas en tiempo real", "Carga de avatar arrastrando y soltando", "Validación de campos de formulario", "PDF limpio para imprimir/descargar"],
+      fr: ["Aperçu en direct du billet en temps réel", "Téléchargement d'avatar par glisser-déposer", "Validation des champs de formulaire", "Billet PDF propre à imprimer/télécharger"]
+    }
+  },
+  {
     id: "rich-media-nike-slider",
     title: "Nike Boots Interactive Slider Ad",
     category: "rich-media",
@@ -79,7 +98,8 @@ export const projectsData: Project[] = [
       fr: "Une bannière publicitaire interactive de pointe. Elle met à jour dynamiquement les messages, les images et les thèmes en temps réel en fonction de l'emplacement cible, de la météo et de l'heure locale."
     },
     tags: ["HTML5", "Vite", "DCO Engine", "GeoIP Simulation", "AdTech API"],
-    demoType: "sandbox",
+    demoType: "iframe",
+    demoUrl: "https://we13b-md.github.io/mirinda-DCO/",
     features: {
       en: ["Dynamic visual adaptation", "Simulated contextual triggers", "Weather-based custom product display", "Advanced conversion telemetry"],
       es: ["Adaptación visual dinámica", "Disparadores contextuales simulados", "Productos basados en el clima", "Telemetría avanzada de conversión"],
@@ -102,24 +122,6 @@ export const projectsData: Project[] = [
       en: ["Addictive mini-game loop", "Smooth frame rendering", "Promo code award screen", "Click-to-redeem conversion hook"],
       es: ["Bucle de minijuego adictivo", "Renderizado de fotogramas suave", "Pantalla de entrega de código promocional", "Gancho de conversión al hacer clic"],
       fr: ["Boucle de mini-jeu addictive", "Rendu fluide des images", "Écran de remise de code promo", "Bouton de conversion en un clic"]
-    }
-  },
-  {
-    id: "rich-media-expand",
-    title: "High-Impact Expandable Video Ad Unit",
-    category: "rich-media",
-    subCategory: "Expandable Ads",
-    description: {
-      en: "A premium rich media banner ad that starts as a standard 300x250 inline ad, but smoothly expands to a high-impact 600x500 overlay upon hover, featuring an interactive video player, customized hot-spots, and dynamic product selector.",
-      es: "Un banner de Rich Media premium que comienza como un anuncio en línea estándar de 300x250, pero se expande suavemente a una superposición de 600x500 al pasar el cursor, con reproductor de video y selector de productos.",
-      fr: "Une bannière Rich Media haut de gamme qui commence comme une publicité en ligne standard de 300x250, mais s'agrandit en douceur vers une superposition de 600x500 au survol, avec lecteur vidéo interactif."
-    },
-    tags: ["CSS Expand Keyframes", "Video Hotspots", "Ad Banner Standards", "Overlay Analytics"],
-    demoType: "sandbox",
-    features: {
-      en: ["Liquid transition effect", "Interactive video hotspots", "Swipeable dynamic product carousel", "Close button auto-retract safeguards"],
-      es: ["Efecto de transición fluida", "Puntos calientes en video interactivo", "carrusel dinámico de productos", "Salvaguardas de cierre automático"],
-      fr: ["Effet de transition fluide", "Points chauds vidéo interactifs", "Carrousel de produits dynamique", "Sécurité de fermeture automatique"]
     }
   }
 ];

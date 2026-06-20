@@ -18,7 +18,7 @@ export default function Skills({ language }: SkillsProps) {
     {
       title: dict.skillsWebDesign,
       icon: "🎨",
-      skills: ["Vanilla CSS3", "UI/UX Prototyping", "Responsive Layouts", "Google Fonts integrations", "Micro-interactions", "Framer Motion ideas", "Figma wireframing"]
+      skills: ["Vanilla CSS3", "Responsive Layouts", "Google Fonts integrations", "Micro-interactions", "Framer Motion ideas"]
     },
     {
       title: dict.skillsRichMedia,

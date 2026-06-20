@@ -23,7 +23,7 @@ export default function Projects({ language }: ProjectsProps) {
   return (
     <section id="projects" className="section">
       <h2 className="section-title">{dict.projectsTitle}</h2>
-      
+
       <p style={{ color: 'var(--text-muted)', marginBottom: '30px', maxWidth: '700px' }}>
         {dict.projectsSub}
       </p>
@@ -31,6 +31,7 @@ export default function Projects({ language }: ProjectsProps) {
       {/* Simulator Overlay Anchor View */}
       {simulatingId ? (
         <Simulator 
+          key={simulatingId}
           projectId={simulatingId} 
           language={language} 
           onClose={() => setSimulatingId(null)} 
@@ -39,19 +40,19 @@ export default function Projects({ language }: ProjectsProps) {
         <>
           {/* Categorization Tabs */}
           <div className="tabs-container">
-            <button 
+            <button
               onClick={() => setActiveTab('all')}
               className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
             >
               {dict.projectsFilterAll}
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('web-app')}
               className={`tab-btn ${activeTab === 'web-app' ? 'active' : ''}`}
             >
               {dict.projectsFilterWeb}
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('rich-media')}
               className={`tab-btn ${activeTab === 'rich-media' ? 'active' : ''}`}
             >
@@ -60,7 +61,7 @@ export default function Projects({ language }: ProjectsProps) {
           </div>
 
           {/* Projects Extensible Grid */}
-          <div 
+          <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -71,7 +72,7 @@ export default function Projects({ language }: ProjectsProps) {
             {filteredProjects.map((project) => (
               <GlowCard key={project.id}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', gap: '16px' }}>
-                  
+
                   {/* Card Top */}
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -109,8 +110,8 @@ export default function Projects({ language }: ProjectsProps) {
                     {/* Tags */}
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
                       {project.tags.map((t, i) => (
-                        <span 
-                          key={i} 
+                        <span
+                          key={i}
                           style={{
                             fontSize: '0.7rem',
                             background: 'var(--bg-surface)',
