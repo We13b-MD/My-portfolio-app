@@ -9,6 +9,7 @@ import About from './sections/About';
 import Projects from './sections/Projects';
 import Skills from './sections/Skills';
 import Contact from './sections/Contact';
+import myPic from './assets/myPic.jpeg';
 
 export default function App() {
   // Theme and language standard hooks
@@ -21,6 +22,7 @@ export default function App() {
   
   const [language, setLanguage] = useState<Language>('en');
   const [activeSection, setActiveSection] = useState('hero');
+  const [isCertDropdownOpen, setIsCertDropdownOpen] = useState(false);
 
   // Sync theme to root element
   useEffect(() => {
@@ -81,23 +83,206 @@ export default function App() {
         <aside className="sidebar-pane">
           
           {/* Header Profile */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className="text-slide-up">
-            <a 
-              href="#hero" 
-              style={{ 
-                fontSize: '1.8rem', 
-                fontWeight: 800, 
-                fontFamily: 'var(--font-heading)',
-                color: 'var(--accent)',
-                textShadow: '0 0 15px hsla(var(--accent-hsl), 0.25)',
-                letterSpacing: '-0.02em'
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} className="text-slide-up">
+            <div style={{ position: 'relative', width: '120px', height: '120px' }}>
+              <img 
+                src={myPic} 
+                alt="Idundun Michael" 
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  borderRadius: '50%', // circular shape
+                  objectFit: 'cover',
+                  border: '2px solid hsla(var(--accent-hsl), 0.3)',
+                  boxShadow: 'var(--card-shadow)',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05) translateY(-4px)';
+                  e.currentTarget.style.borderColor = 'var(--accent)';
+                  e.currentTarget.style.boxShadow = '0 12px 30px hsla(var(--accent-hsl), 0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                  e.currentTarget.style.borderColor = 'hsla(var(--accent-hsl), 0.3)';
+                  e.currentTarget.style.boxShadow = 'var(--card-shadow)';
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a 
+                href="#hero" 
+                style={{ 
+                  fontSize: '1.8rem', 
+                  fontWeight: 800, 
+                  fontFamily: 'var(--font-heading)',
+                  color: 'var(--accent)',
+                  textShadow: '0 0 15px hsla(var(--accent-hsl), 0.25)',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                Michael.dev
+              </a>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                {dict.heroSub}
+              </p>
+            </div>
+          </div>
+
+          {/* CV & Certifications Actions */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '12px', 
+              marginTop: '20px', 
+              position: 'relative',
+              zIndex: 30
+            }} 
+            className="text-slide-up delay-100"
+          >
+            {/* Download CV Button */}
+            <a
+              href="/Idundun_Michael_Resume.pdf"
+              download="Idundun_Michael_Resume.pdf"
+              className="btn-emerald"
+              style={{
+                padding: '10px 16px',
+                fontSize: '0.85rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                width: '100%',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px hsla(var(--accent-hsl), 0.15)',
+                textDecoration: 'none'
               }}
             >
-              Michael.dev
+              <span>📥</span> {dict.heroResume}
             </a>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-              {dict.heroSub}
-            </p>
+
+            {/* Certifications Collapsible Dropdown */}
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setIsCertDropdownOpen(!isCertDropdownOpen)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  padding: '10px 16px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  color: 'var(--text-color)',
+                  background: 'var(--glass-bg)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--accent)';
+                  e.currentTarget.style.background = 'hsla(var(--accent-hsl), 0.05)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!isCertDropdownOpen) {
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                    e.currentTarget.style.background = 'var(--glass-bg)';
+                  }
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span>🎓</span> 
+                  {language === 'en' ? 'Certifications' : language === 'es' ? 'Certificaciones' : 'Certifications'}
+                </span>
+                <span style={{ 
+                  fontSize: '0.7rem', 
+                  transition: 'transform 0.3s ease',
+                  transform: isCertDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  display: 'inline-block'
+                }}>
+                  ▼
+                </span>
+              </button>
+
+              {/* Dropdown Items List */}
+              {isCertDropdownOpen && (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '4px',
+                    position: 'absolute',
+                    top: 'calc(100% + 6px)',
+                    left: 0,
+                    width: '100%',
+                    background: 'var(--bg-surface)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '12px',
+                    padding: '8px',
+                    boxShadow: 'var(--card-shadow)',
+                    zIndex: 40,
+                  }}
+                >
+                  <a
+                    href="https://drive.google.com/file/d/18dK2GZ95PsdpUX1uJ04EAl4gK4e-sypP/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 12px',
+                      fontSize: '0.75rem',
+                      fontWeight: 500,
+                      borderRadius: '8px',
+                      color: 'var(--text-muted)',
+                      transition: 'all 0.2s ease',
+                      textDecoration: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--accent)';
+                      e.currentTarget.style.background = 'hsla(var(--accent-hsl), 0.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.background = 'transparent';
+                    }}
+                  >
+                    <span>📜</span> Full Stack Certificate ↗
+                  </a>
+                  <a
+                    href="https://drive.google.com/file/d/1D5xVESZCx5MtIkqdwLJuyRimhe4aqsgK/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 12px',
+                      fontSize: '0.75rem',
+                      fontWeight: 500,
+                      borderRadius: '8px',
+                      color: 'var(--text-muted)',
+                      transition: 'all 0.2s ease',
+                      textDecoration: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--accent)';
+                      e.currentTarget.style.background = 'hsla(var(--accent-hsl), 0.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.background = 'transparent';
+                    }}
+                  >
+                    <span>📜</span> HTML & CSS Certificate ↗
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Core Vertical Navigation Menu */}

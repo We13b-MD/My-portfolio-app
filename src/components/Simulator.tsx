@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Language } from '../constants/translations';
 import { projectsData } from '../constants/projects';
 
@@ -64,7 +64,7 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
             {projectId === 'bank-alert' && (language === 'en' ? 'Phishing Alert Analyzer' : language === 'es' ? 'Analizador de Alertas de Fraude' : 'Analyseur d\'Alertes de Fraude')}
             {projectId === 'rich-media-nike-slider' && (language === 'en' ? 'Nike Boot Swipe Campaign' : language === 'es' ? 'Campaña Deslizante de Botas Nike' : 'Campagne Glissière Nike')}
             {projectId === 'rich-media-dco' && (language === 'en' ? 'DCO Real-Time Simulator' : language === 'es' ? 'Simulador DCO en Tiempo Real' : 'Simulateur DCO en Temps Réel')}
-            {projectId === 'rich-media-game' && (language === 'en' ? 'Playable Banner Game' : language === 'es' ? 'Banner de Juego Jugable' : 'Bannière de Jeu Jouable')}
+            {projectId === 'rich-media-game' && (language === 'en' ? 'Monster Drag to Catch Game' : language === 'es' ? 'Juego Monster Drag to Catch' : 'Jeu Monster Drag to Catch')}
           </h3>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -413,10 +413,10 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
               )}
               {projectId === 'rich-media-game' && (
                 <>
-                  <p><strong>Gamified Playable Banner:</strong></p>
-                  <p>1. Click <strong>"Start Game"</strong>. Use the buttons on screen to move the cart.</p>
-                  <p>2. Catch green discount bubbles (+1 Point) and avoid red hazard fraud bubbles (scams).</p>
-                  <p>3. Reach 5 points to unlock a custom promocode discount reward!</p>
+                  <p><strong>Monster Drag to Catch:</strong></p>
+                  <p>1. Switch to <strong>"Live Deployed App"</strong> to simulate the production build live via iframe.</p>
+                  <p>2. Drag the basket at the bottom left and right using mouse or touch drag.</p>
+                  <p>3. Catch the falling Monster energy bottles within the 15-second limit.</p>
                 </>
               )}
               {projectId === 'rich-media-nike-slider' && (
@@ -943,12 +943,18 @@ function DcoSandbox() {
 function GamifiedSandbox() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(15);
   const [basketX, setBasketX] = useState(120); // 0 to 240
   const [items, setItems] = useState<{ id: number; x: number; y: number; isGood: boolean }[]>([]);
-  const [unlockedCoupon, setUnlockedCoupon] = useState(false);
+  const [gameResult, setGameResult] = useState<'idle' | 'win' | 'lose'>('idle');
 
   const gameWidth = 300;
   const gameHeight = 250;
+
+  const scoreRef = useRef(score);
+  useEffect(() => {
+    scoreRef.current = score;
+  }, [score]);
 
   // Move basket
   const moveLeft = () => setBasketX((x) => Math.max(0, x - 30));
@@ -963,12 +969,30 @@ function GamifiedSandbox() {
         id: Date.now() + Math.random(),
         x: Math.random() * 260 + 10,
         y: 0,
-        isGood: Math.random() > 0.35 // 65% chance of coupon deal, 35% scam bomb
+        isGood: Math.random() > 0.3 // 70% Monster bottles, 30% obstacles
       };
       setItems((prev) => [...prev, newItem]);
-    }, 1200);
+    }, 800);
 
     return () => clearInterval(spawnTimer);
+  }, [isPlaying]);
+
+  // Game timer countdown
+  useEffect(() => {
+    if (!isPlaying) return;
+    setTimeLeft(15);
+    const timer = setInterval(() => {
+      setTimeLeft((t) => {
+        if (t <= 1) {
+          setIsPlaying(false);
+          setGameResult(scoreRef.current >= 5 ? 'win' : 'lose');
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, [isPlaying]);
 
   // Physics loop
@@ -977,7 +1001,7 @@ function GamifiedSandbox() {
 
     const gameLoop = setInterval(() => {
       setItems((prevItems) => {
-        const nextItems = prevItems.map((item) => ({ ...item, y: item.y + 4 }));
+        const nextItems = prevItems.map((item) => ({ ...item, y: item.y + 5 }));
 
         // Check collisions with basket (basket is at y = 200, width = 60, height = 20)
         const activeItems: typeof items = [];
@@ -1006,28 +1030,17 @@ function GamifiedSandbox() {
     return () => clearInterval(gameLoop);
   }, [isPlaying, basketX]);
 
-  // Check victory coupon unlock
-  useEffect(() => {
-    if (score >= 5) {
-      const timer = setTimeout(() => {
-        setIsPlaying(false);
-        setUnlockedCoupon(true);
-      }, 0);
-      return () => clearTimeout(timer);
-    }
-  }, [score]);
-
   const startGame = () => {
     setScore(0);
     setItems([]);
-    setUnlockedCoupon(false);
+    setGameResult('idle');
     setIsPlaying(true);
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', height: '100%', alignItems: 'center' }}>
       <div style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 600, borderBottom: '1px solid #222', paddingBottom: '6px', width: '100%' }}>
-        🎮 Playable gamified ad unit (Interactive HTML5 Banner)
+        🎮 Playable gamified ad unit (Monster Catch Simulator)
       </div>
 
       <div
@@ -1045,27 +1058,27 @@ function GamifiedSandbox() {
           alignItems: 'center'
         }}
       >
-        {!isPlaying && !unlockedCoupon ? (
+        {!isPlaying && gameResult === 'idle' ? (
           /* Start Screen */
           <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h5 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#10b981', marginBottom: '8px' }}>Catch The Deals! 🧺</h5>
-            <p style={{ fontSize: '0.7rem', color: '#888', marginBottom: '14px' }}>Catch falling coupons! Avoid malicious fraud skulls. Get 5 points to unlock a discount reward!</p>
+            <h5 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#10b981', marginBottom: '8px' }}>Monster Catch Challenge! 🧺</h5>
+            <p style={{ fontSize: '0.7rem', color: '#888', marginBottom: '14px' }}>Catch falling Monster energy cans 🥤! Avoid obstacles ❌. Get 5 points within 15 seconds to win!</p>
             <button
               onClick={startGame}
-              style={{ padding: '8px 16px', background: '#10b981', color: 'white', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', background: '#10b981', color: 'white', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', border: 'none' }}
             >
-              Start Game
+              Start Challenge
             </button>
           </div>
-        ) : unlockedCoupon ? (
-          /* Coupon Reward screen */
+        ) : !isPlaying && gameResult === 'win' ? (
+          /* Win screen */
           <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h5 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#10b981', marginBottom: '4px' }}>🎉 YOU WON!</h5>
-            <p style={{ fontSize: '0.7rem', color: '#888', marginBottom: '8px' }}>Showcasing playable conversion banner effectiveness!</p>
+            <h5 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#10b981', marginBottom: '4px' }}>⚡ CHALLENGE COMPLETE!</h5>
+            <p style={{ fontSize: '0.7rem', color: '#888', marginBottom: '8px' }}>Showcasing high engagement playable ad unit success!</p>
 
             <div style={{ background: '#1a1a1a', border: '1px dashed #10b981', padding: '10px', borderRadius: '4px', margin: '10px 0' }}>
-              <div style={{ fontSize: '0.65rem', color: '#666', textTransform: 'uppercase' }}>Your Reward Coupon Code</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#10b981', fontFamily: 'monospace' }}>MICHAEL_PRO_DEV</div>
+              <div style={{ fontSize: '0.65rem', color: '#666', textTransform: 'uppercase' }}>Promo Unlock Code</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#10b981', fontFamily: 'monospace' }}>MONSTER_POWER_UP</div>
             </div>
 
             <button
@@ -1075,19 +1088,31 @@ function GamifiedSandbox() {
               Play Again
             </button>
             <button
-              onClick={() => alert("Simulating a click-through conversion to Michael's premium checkout service!")}
-              style={{ padding: '6px 12px', background: '#10b981', color: 'white', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', fontSize: '0.75rem' }}
+              onClick={() => alert("Simulating a click-through conversion to the brand landing page!")}
+              style={{ padding: '6px 12px', background: '#10b981', color: 'white', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', border: 'none', fontSize: '0.75rem' }}
             >
-              Claim Deal
+              Claim Reward
+            </button>
+          </div>
+        ) : !isPlaying && gameResult === 'lose' ? (
+          /* Lose Screen */
+          <div style={{ textAlign: 'center', padding: '20px' }}>
+            <h5 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#ef4444', marginBottom: '4px' }}>❌ TIME'S UP!</h5>
+            <p style={{ fontSize: '0.7rem', color: '#888', marginBottom: '8px' }}>You only caught {score} Monster energy drinks. You need at least 5 to win.</p>
+            <button
+              onClick={startGame}
+              style={{ padding: '8px 16px', background: '#ef4444', color: 'white', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', border: 'none', marginTop: '8px' }}
+            >
+              Try Again
             </button>
           </div>
         ) : (
           /* Game Sandbox Playing */
           <>
-            {/* Score header */}
+            {/* Score & Time header */}
             <div style={{ position: 'absolute', top: '10px', left: '10px', right: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 'bold', zIndex: 2 }}>
-              <span>Score: {score} / 5</span>
-              <span style={{ color: '#ef4444' }}>Catch 💵 | Avoid 💣</span>
+              <span style={{ color: '#10b981' }}>Score: {score} / 5</span>
+              <span style={{ color: '#f59e0b' }}>Time: {timeLeft}s</span>
             </div>
 
             {/* Falling Items */}
@@ -1103,7 +1128,7 @@ function GamifiedSandbox() {
                   transition: 'top 0.05s linear'
                 }}
               >
-                {item.isGood ? '💵' : '💣'}
+                {item.isGood ? '🥤' : '❌'}
               </span>
             ))}
 
@@ -1120,7 +1145,7 @@ function GamifiedSandbox() {
                 borderRadius: '0 0 10px 10px',
                 boxShadow: '0 4px 10px rgba(16, 185, 129, 0.4)',
                 textAlign: 'center',
-                fontSize: '0.6rem',
+                fontSize: '0.65rem',
                 color: 'white',
                 fontWeight: 'bold',
                 display: 'flex',

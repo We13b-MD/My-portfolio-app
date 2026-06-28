@@ -108,20 +108,21 @@ export const projectsData: Project[] = [
   },
   {
     id: "rich-media-game",
-    title: "Interactive Gamified 'Catch-the-Deal' Banner",
+    title: "Monster Energy 'Drag-to-Catch' Playable Ad",
     category: "rich-media",
     subCategory: "Gamified Ads",
     description: {
-      en: "A playable ad banner that increases viewer engagement by 400% through an embedded interactive mini-game. Catch falling discount coupons inside the shopping basket while dodging scam bubbles, triggering a conversion coupon at the end.",
-      es: "Un banner publicitario jugable que aumenta el compromiso del espectador en un 400% mediante un minijuego interactivo. Atrapa cupones de descuento mientras esquivas burbujas de estafa.",
-      fr: "Une bannière publicitaire jouable qui augmente l'engagement des spectateurs de 400 % grâce à un mini-jeu interactives. Attrapez les coupons de réduction tout en évitant les bulles d'arnaque."
+      en: "An interactive, highly engaging HTML5 playable ad banner built for Monster Energy campaigns. Players drag a basket to catch falling Monster bottles within a 15-second time limit, demonstrating gamified AdTech and brand engagement.",
+      es: "Un banner publicitario interactivo y jugable en HTML5 para Monster Energy. Los jugadores arrastran una cesta para atrapar las botellas de Monster que caen dentro de un límite de 15 segundos.",
+      fr: "Une bannière publicitaire HTML5 jouable et interactive conçue pour Monster Energy. Les joueurs font glisser un panier pour attraper les bouteilles de Monster dans un temps limite de 15 secondes."
     },
-    tags: ["2D Game Engine", "Canvas/CSS", "High engagement Creative", "Coupon Rewards", "Ad Gamification"],
-    demoType: "sandbox",
+    tags: ["HTML5 Banner", "GSAP Draggable", "Gamified Ad", "Playable Banner", "AdTech Rich Media"],
+    demoType: "iframe",
+    demoUrl: "https://we13b-md.github.io/Monster-Drag-to-Catch/",
     features: {
-      en: ["Addictive mini-game loop", "Smooth frame rendering", "Promo code award screen", "Click-to-redeem conversion hook"],
-      es: ["Bucle de minijuego adictivo", "Renderizado de fotogramas suave", "Pantalla de entrega de código promocional", "Gancho de conversión al hacer clic"],
-      fr: ["Boucle de mini-jeu addictive", "Rendu fluide des images", "Écran de remise de code promo", "Bouton de conversion en un clic"]
+      en: ["Interactive drag-and-drop basket", "15-second countdown timer", "Custom branded design assets", "High-impact conversion screen"],
+      es: ["Cesta interactiva para arrastrar y soltar", "Temporizador de cuenta regresiva de 15 segundos", "Recursos de diseño de marca personalizados", "Pantalla de conversión de alto impacto"],
+      fr: ["Panier interactif par glisser-déposer", "Compte à rebours de 15 secondes", "Actifs de conception de marque personnalisés", "Écran de conversion à fort impact"]
     }
   }
 ];
