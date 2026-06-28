@@ -7,7 +7,7 @@ interface WhatsAppButtonProps {
 
 export default function WhatsAppButton({ language }: WhatsAppButtonProps) {
   // Let's create the URL. We can use a placeholder number like +2348000000000 (standard Nigeria number syntax since Michael is a common name in Nigeria, or we can use a custom prompt value. Let's make it easy to modify by configuring it as a constant).
-  const phoneNumber = "2348030000000"; // Placeholder: user can replace with their actual WhatsApp number
+  const phoneNumber = "2348132946210"; // User's real WhatsApp number
   const messageText = encodeURIComponent(translations[language].whatsappMessage);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${messageText}`;
 
