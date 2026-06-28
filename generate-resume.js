@@ -15,10 +15,30 @@ doc.font('Helvetica-Bold').fontSize(18).text('IDUNDUN MICHAEL DAMILARE', { align
 doc.font('Helvetica').fontSize(11).fillColor(ACCENT_COLOR).text('Web Developer & HTML5 Banner Developer', { align: 'center' });
 doc.moveDown(0.2);
 
-doc.font('Helvetica').fontSize(7.8).fillColor(TEXT_MUTED).text(
-  'Lagos, Nigeria  |  +2348132946210  |  idundunmd13@gmail.com  |  github.com/We13b-MD  |  my-portfolio-app-seven-mu.vercel.app', 
-  { align: 'center' }
-);
+doc.font('Helvetica').fontSize(7.8);
+const part1 = 'Lagos, Nigeria  |  +2348132946210  |  ';
+const email = 'idundunmd13@gmail.com';
+const part2 = '  |  ';
+const github = 'github.com/We13b-MD';
+const part3 = '  |  ';
+const portfolio = 'my-portfolio-app-seven-mu.vercel.app';
+
+const totalWidth = 
+  doc.widthOfString(part1) + 
+  doc.widthOfString(email) + 
+  doc.widthOfString(part2) + 
+  doc.widthOfString(github) + 
+  doc.widthOfString(part3) + 
+  doc.widthOfString(portfolio);
+
+const startX = (595.28 - totalWidth) / 2;
+
+doc.fillColor(TEXT_MUTED).text(part1, startX, doc.y, { continued: true })
+   .fillColor(ACCENT_COLOR).text(email, { link: 'mailto:idundunmd13@gmail.com', continued: true })
+   .fillColor(TEXT_MUTED).text(part2, { link: null, continued: true })
+   .fillColor(ACCENT_COLOR).text(github, { link: 'https://github.com/We13b-MD', continued: true })
+   .fillColor(TEXT_MUTED).text(part3, { link: null, continued: true })
+   .fillColor(ACCENT_COLOR).text(portfolio, { link: 'https://my-portfolio-app-seven-mu.vercel.app/' });
 doc.moveDown(1);
 
 // Helper for section titles
