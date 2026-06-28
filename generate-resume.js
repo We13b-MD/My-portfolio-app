@@ -15,8 +15,8 @@ doc.font('Helvetica-Bold').fontSize(18).text('IDUNDUN MICHAEL DAMILARE', { align
 doc.font('Helvetica').fontSize(11).fillColor(ACCENT_COLOR).text('Web Developer & HTML5 Banner Developer', { align: 'center' });
 doc.moveDown(0.2);
 
-doc.font('Helvetica').fontSize(8.5).fillColor(TEXT_MUTED).text(
-  'Lagos, Nigeria  |  +2348132946210  |  idundunmd13@gmail.com  |  github.com/We13b-MD', 
+doc.font('Helvetica').fontSize(7.8).fillColor(TEXT_MUTED).text(
+  'Lagos, Nigeria  |  +2348132946210  |  idundunmd13@gmail.com  |  github.com/We13b-MD  |  my-portfolio-app-seven-mu.vercel.app', 
   { align: 'center' }
 );
 doc.moveDown(1);

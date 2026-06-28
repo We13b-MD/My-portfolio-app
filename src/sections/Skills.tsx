@@ -1,6 +1,7 @@
 import type { Language } from '../constants/translations';
 import { translations } from '../constants/translations';
 import GlowCard from '../components/GlowCard';
+import ScrollReveal from '../components/ScrollReveal';
 
 interface SkillsProps {
   language: Language;
@@ -45,49 +46,51 @@ export default function Skills({ language }: SkillsProps) {
         className="skills-grid"
       >
         {skillGroups.map((group, idx) => (
-          <GlowCard key={idx}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              
-              {/* Header */}
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
-                <span style={{ fontSize: '1.5rem' }}>{group.icon}</span>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{group.title}</h3>
-              </div>
+          <ScrollReveal key={idx} delay={idx * 150}>
+            <GlowCard>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                
+                {/* Header */}
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+                  <span style={{ fontSize: '1.5rem' }}>{group.icon}</span>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{group.title}</h3>
+                </div>
 
-              {/* Chips grid */}
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {group.skills.map((skill, sIdx) => (
-                  <span 
-                    key={sIdx}
-                    style={{
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      background: 'var(--bg-surface)',
-                      border: '1px solid var(--border-color)',
-                      color: 'var(--text-color)',
-                      padding: '6px 12px',
-                      borderRadius: '30px',
-                      transition: 'all 0.2s ease',
-                      cursor: 'default'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent)';
-                      e.currentTarget.style.color = 'var(--accent)';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-color)';
-                      e.currentTarget.style.color = 'var(--text-color)';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+                {/* Chips grid */}
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {group.skills.map((skill, sIdx) => (
+                    <span 
+                      key={sIdx}
+                      style={{
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        background: 'var(--bg-surface)',
+                        border: '1px solid var(--border-color)',
+                        color: 'var(--text-color)',
+                        padding: '6px 12px',
+                        borderRadius: '30px',
+                        transition: 'all 0.2s ease',
+                        cursor: 'default'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--accent)';
+                        e.currentTarget.style.color = 'var(--accent)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--border-color)';
+                        e.currentTarget.style.color = 'var(--text-color)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
 
-            </div>
-          </GlowCard>
+              </div>
+            </GlowCard>
+          </ScrollReveal>
         ))}
       </div>
     </section>

@@ -66,18 +66,10 @@ export default function Contact({ language }: ContactProps) {
         {dict.contactSub}
       </p>
 
-      <div 
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 1fr',
-          gap: '40px',
-          alignItems: 'start'
-        }}
-        className="contact-layout-grid"
-      >
+      <div className="contact-layout-grid">
         {/* Contact Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="contact-form-row">
+          <div className="contact-form-row">
             {/* Name Input */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label htmlFor="name" style={{ fontSize: '0.85rem', fontWeight: 600 }}>{dict.contactName}</label>

@@ -480,6 +480,62 @@ button, input, textarea, select {
 /* ==========================================
    6. RESPONSIVE DESIGN MEDIA QUERIES
    ========================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.simulator-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 30px;
+  align-items: start;
+}
+
+.simulator-layout-grid.expanded {
+  grid-template-columns: 1fr;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Scroll Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects-grid .reveal-on-scroll,
+.skills-grid .reveal-on-scroll {
+  height: 100%;
+}
+
 @media (max-width: 1024px) {
   .layout-grid {
     grid-template-columns: 1fr;
@@ -498,6 +554,13 @@ button, input, textarea, select {
     padding: 20px 0 60px 0;
     gap: 80px;
   }
+
+  .about-grid,
+  .contact-layout-grid,
+  .simulator-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -507,7 +570,21 @@ button, input, textarea, select {
   
   .btn-emerald, .btn-secondary {
     width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
     justify-content: center;
+  }
+
+  .hero-ctas {
+    justify-content: center !important;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .simulator-overlay {
+    padding: 16px !important;
   }
   
   .whatsapp-fab {

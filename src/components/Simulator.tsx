@@ -107,15 +107,7 @@ export default function Simulator({ projectId, language, onClose }: SimulatorPro
       </div>
 
       {/* Simulator Device Render */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: isExpandedMode ? '1fr' : '1fr minmax(280px, 340px)',
-          gap: '30px',
-          alignItems: 'start'
-        }}
-        className="simulator-layout-grid"
-      >
+      <div className={`simulator-layout-grid ${isExpandedMode ? 'expanded' : ''}`}>
         {/* Left Side: Toggle & Device Wrapper */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
 
@@ -980,7 +972,6 @@ function GamifiedSandbox() {
   // Game timer countdown
   useEffect(() => {
     if (!isPlaying) return;
-    setTimeLeft(15);
     const timer = setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
@@ -1034,6 +1025,7 @@ function GamifiedSandbox() {
     setScore(0);
     setItems([]);
     setGameResult('idle');
+    setTimeLeft(15);
     setIsPlaying(true);
   };
 

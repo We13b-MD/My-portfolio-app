@@ -13,15 +13,7 @@ export default function About({ language }: AboutProps) {
     <section id="about" className="section">
       <h2 className="section-title">{dict.aboutTitle}</h2>
       
-      <div 
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 1fr',
-          gap: '40px',
-          alignItems: 'start'
-        }}
-        className="about-grid"
-      >
+      <div className="about-grid">
         {/* Paragraph Details */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', fontSize: '1rem', color: 'var(--text-muted)' }}>
           <p>{dict.aboutP1}</p>

@@ -138,7 +138,9 @@ export default function App() {
               gap: '12px', 
               marginTop: '20px', 
               position: 'relative',
-              zIndex: 30
+              zIndex: 30,
+              width: '100%',
+              alignItems: 'center'
             }} 
             className="text-slide-up delay-100"
           >
@@ -155,6 +157,7 @@ export default function App() {
                 justifyContent: 'center',
                 gap: '8px',
                 width: '100%',
+                maxWidth: '320px',
                 borderRadius: '12px',
                 boxShadow: '0 4px 12px hsla(var(--accent-hsl), 0.15)',
                 textDecoration: 'none'
@@ -164,7 +167,7 @@ export default function App() {
             </a>
 
             {/* Certifications Collapsible Dropdown */}
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
               <button
                 onClick={() => setIsCertDropdownOpen(!isCertDropdownOpen)}
                 style={{

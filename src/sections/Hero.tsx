@@ -98,7 +98,7 @@ export default function Hero({ language }: HeroProps) {
         </p>
 
         {/* CTAs */}
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        <div className="hero-ctas">
           <a href="#contact" className="btn-emerald">
             {dict.heroCTA} &nbsp; →
           </a>
