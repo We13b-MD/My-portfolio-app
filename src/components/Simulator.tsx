@@ -135,8 +135,8 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
       {/* Device Simulation View Frame */}
       <div
         style={{
-          width: `${customWidth}px`,
-          maxWidth: '100%',
+          width: '100%',
+          maxWidth: `${customWidth}px`,
           margin: '0 auto',
           background: '#0a0a0a',
           borderRadius: '16px',
@@ -618,7 +618,7 @@ function TicketSandbox({ isAutoplay }: { isAutoplay: boolean }) {
         🎫 Dynamic Conference Ticket Generation
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', minHeight: 0 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', minHeight: 0 }}>
         {/* Ticket inputs */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', background: '#18181b', padding: '8px', borderRadius: '6px' }}>
           <div>
@@ -908,7 +908,7 @@ function DcoSandbox({ isAutoplay }: { isAutoplay: boolean }) {
         📢 Dynamic Creative Optimization (DCO) Banner Engine
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '6px', background: '#18181b', padding: '6px', borderRadius: '6px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(75px, 1fr))', gap: '6px', background: '#18181b', padding: '6px', borderRadius: '6px' }}>
         <div>
           <label style={{ fontSize: '0.55rem', color: '#888', display: 'block' }}>City</label>
           <select value={city} onChange={(e) => handleSelectChange('city', e.target.value)} style={{ width: '100%', fontSize: '0.7rem', background: '#27272a', border: '1px solid #3f3f46', color: 'white', borderRadius: '4px', padding: '1px' }}>

@@ -617,7 +617,7 @@ button, input, textarea, select {
   transform: translateY(-2px);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1250px) {
   .project-large-card {
     flex-direction: row;
     align-items: stretch;
