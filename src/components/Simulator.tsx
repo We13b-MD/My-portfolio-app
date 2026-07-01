@@ -33,15 +33,16 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
   return (
     <div
       ref={containerRef}
+      className="simulator-wrapper"
       style={{
         background: 'var(--glass-bg)',
         border: '1px solid var(--border-color)',
         borderRadius: 'var(--radius-lg)',
-        padding: '20px',
+        padding: '16px',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px',
+        gap: '12px',
         overflow: 'hidden',
         width: '100%'
       }}
@@ -132,7 +133,6 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
         </div>
       </div>
 
-      {/* Device Simulation View Frame */}
       <div
         className="device-simulation-frame"
         style={{
@@ -140,11 +140,11 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
           maxWidth: `${customWidth}px`,
           margin: '0 auto',
           background: '#0a0a0a',
-          borderRadius: '16px',
-          border: '6px solid #262626',
+          borderRadius: '12px',
+          border: '4px solid #262626',
           aspectRatio: projectId.startsWith('rich-media') ? 'auto' : (customWidth <= 480 ? 'auto' : '16/10'),
-          height: projectId.startsWith('rich-media') ? 'auto' : (customWidth <= 480 ? '320px' : 'auto'),
-          minHeight: projectId.startsWith('rich-media') ? '240px' : '280px',
+          height: projectId.startsWith('rich-media') ? 'auto' : (customWidth <= 480 ? '260px' : 'auto'),
+          minHeight: projectId.startsWith('rich-media') ? '200px' : '240px',
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
@@ -160,8 +160,8 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
             flex: 1,
             background: '#121212',
             color: '#ffffff',
-            padding: '12px',
-            fontSize: '0.85rem',
+            padding: '10px',
+            fontSize: '0.82rem',
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',

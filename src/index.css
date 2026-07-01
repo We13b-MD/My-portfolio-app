@@ -539,20 +539,27 @@ button, input, textarea, select {
 @media (max-width: 1024px) {
   .layout-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 24px;
+    gap: 0;
+    padding: 0 20px;
   }
-  
+
   .sidebar-pane {
     position: relative;
     height: auto;
-    padding: 40px 0 20px 0;
-    gap: 30px;
+    padding: 24px 0 16px 0;
+    gap: 16px;
   }
-  
+
+  /* On mobile: sidebar becomes a compact top header */
+  .sidebar-pane > .text-slide-up:first-child {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 16px;
+  }
+
   .content-pane {
-    padding: 20px 0 60px 0;
-    gap: 80px;
+    padding: 0 0 60px 0;
+    gap: 60px;
   }
 
   .about-grid,
@@ -561,22 +568,55 @@ button, input, textarea, select {
     grid-template-columns: 1fr !important;
     gap: 30px !important;
   }
+
+  /* Nav becomes horizontal scrollable row on mobile */
+  .sidebar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 8px !important;
+    margin: 0 !important;
+  }
+
+  /* Sidebar action buttons become compact inline */
+  .sidebar-actions {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px !important;
+    margin-top: 8px !important;
+    align-items: center !important;
+  }
+
+  .sidebar-actions .btn-emerald,
+  .sidebar-actions > div {
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto;
+    font-size: 0.78rem !important;
+    padding: 7px 12px !important;
+  }
+
+  .sidebar-footer {
+    padding-top: 12px !important;
+    border-top: 1px solid var(--border-color);
+  }
 }
 
 @media (max-width: 640px) {
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
-  
+
+  /* Override any accidental full-width button rules from default styles */
   .btn-emerald, .btn-secondary {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    justify-content: center;
+    width: auto;
+    max-width: none;
+    margin: 0;
   }
 
   .hero-ctas {
-    justify-content: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
   }
 
   .contact-form-row {
@@ -584,9 +624,9 @@ button, input, textarea, select {
   }
 
   .simulator-overlay {
-    padding: 16px !important;
+    padding: 12px !important;
   }
-  
+
   .whatsapp-fab {
     bottom: 20px;
     right: 20px;
@@ -594,13 +634,19 @@ button, input, textarea, select {
     height: 50px;
   }
 
-  /* Responsive layout padding reductions to prevent squeezed visuals on actual mobile phones */
+  /* Tighten page padding on small phones */
   .layout-grid {
-    padding: 0 10px !important;
+    padding: 0 14px !important;
   }
 
   .glass-card {
     padding: 14px !important;
+  }
+
+  /* Photo shrinks on very small screens */
+  .sidebar-pane img {
+    width: 72px !important;
+    height: 72px !important;
   }
 }
 
@@ -776,6 +822,35 @@ button, input, textarea, select {
   }
   .preview-controls-bar {
     justify-content: center !important;
-    gap: 16px !important;
+    gap: 12px !important;
+    padding: 4px 8px !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Compact the whole simulator wrapper on mobile */
+  .simulator-wrapper {
+    padding: 10px !important;
+    gap: 8px !important;
+  }
+
+  /* Shrink the device frame on phones so it doesn't dominate the screen */
+  .device-simulation-frame {
+    border-width: 3px !important;
+    border-radius: 8px !important;
+    min-height: 190px !important;
+    height: 220px !important;
+    aspect-ratio: auto !important;
+  }
+
+  /* Tighter inner screen padding on mobile */
+  .device-screen-area {
+    padding: 8px !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Shrink autoplay badge on mobile */
+  .autoplay-badge {
+    font-size: 0.65rem !important;
+    padding: 2px 6px !important;
   }
 }
