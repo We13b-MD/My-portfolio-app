@@ -142,13 +142,13 @@ export default function App() {
               width: '100%',
               alignItems: 'center'
             }} 
-            className="text-slide-up delay-100"
+            className="text-slide-up delay-100 sidebar-actions"
           >
             {/* Download CV Button */}
             <a
               href="/Idundun_Michael_Resume.pdf"
               download="Idundun_Michael_Resume.pdf"
-              className="btn-emerald"
+              className="btn-emerald sidebar-cv-btn"
               style={{
                 padding: '10px 16px',
                 fontSize: '0.85rem',
@@ -156,8 +156,6 @@ export default function App() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                width: '100%',
-                maxWidth: '320px',
                 borderRadius: '12px',
                 boxShadow: '0 4px 12px hsla(var(--accent-hsl), 0.15)',
                 textDecoration: 'none'
@@ -167,7 +165,7 @@ export default function App() {
             </a>
 
             {/* Certifications Collapsible Dropdown */}
-            <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
+            <div style={{ position: 'relative' }} className="sidebar-cert-wrapper">
               <button
                 onClick={() => setIsCertDropdownOpen(!isCertDropdownOpen)}
                 style={{

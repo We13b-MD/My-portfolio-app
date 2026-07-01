@@ -70,6 +70,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -135,7 +136,10 @@ button, input, textarea, select {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
+
 
 .layout-grid {
   display: grid;
@@ -853,4 +857,60 @@ button, input, textarea, select {
     font-size: 0.65rem !important;
     padding: 2px 6px !important;
   }
+}
+
+/* ==========================================
+   SIDEBAR BUTTON MOBILE FIXES
+   ========================================== */
+
+/* Desktop: stacked column, full width */
+.sidebar-cv-btn {
+  width: 100%;
+  max-width: 300px;
+}
+.sidebar-cert-wrapper {
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Mobile: compact inline row */
+@media (max-width: 1024px) {
+  .sidebar-actions {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  .sidebar-cv-btn {
+    width: auto !important;
+    max-width: none !important;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .sidebar-cert-wrapper {
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .sidebar-cert-wrapper button {
+    width: auto !important;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ==========================================
+   CLAMP ALL CHILDREN TO VIEWPORT WIDTH
+   ========================================== */
+.project-large-card,
+.projects-grid,
+.simulator-wrapper,
+.device-simulation-frame,
+.glow-card-container {
+  max-width: 100%;
+  box-sizing: border-box;
 }
