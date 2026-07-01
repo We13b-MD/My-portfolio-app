@@ -66,7 +66,7 @@ export const translations: Record<Language, TranslationDict> = {
     aboutP3: "In the digital advertising space, I construct premium interactive Rich Media creatives including Dynamic Creative Optimization (DCO) that instantly adapt to viewers. My designs are highly focused on performance, search engine visibility (SEO), and pixel-perfect transitions.",
     
     projectsTitle: "Featured Projects",
-    projectsSub: "Click 'Simulate' on any project to interact with a live preview right here inside the device frames!",
+    projectsSub: "Explore live simulations and interactive previews of my work directly below. Adjust the width controls to test responsiveness in real-time.",
     projectsFilterAll: "All Projects",
     projectsFilterWeb: "Web Apps",
     projectsFilterRich: "Rich Media Ads",
@@ -111,7 +111,7 @@ export const translations: Record<Language, TranslationDict> = {
     aboutP3: "En el sector de la publicidad digital, construyo piezas creativas premium e interactivas de Rich Media, incluyendo la Optimización Creativa Dinámica (DCO) que se adapta al instante a los espectadores. Mis diseños están altamente enfocados en el rendimiento, la visibilidad en motores de búsqueda (SEO) y las transiciones perfectas.",
     
     projectsTitle: "Proyectos Destacados",
-    projectsSub: "¡Haz clic en 'Simular' en cualquier proyecto para interactuar con una vista previa en vivo directamente dentro de los marcos de dispositivo!",
+    projectsSub: "Explora simulaciones en vivo y vistas previas interactivas de mi trabajo directamente a continuación. Ajusta los controles de ancho para probar la adaptabilidad en tiempo real.",
     projectsFilterAll: "Todos",
     projectsFilterWeb: "Aplicaciones Web",
     projectsFilterRich: "Anuncios Rich Media",
@@ -156,7 +156,7 @@ export const translations: Record<Language, TranslationDict> = {
     aboutP3: "Dans le domaine de la publicité numérique, je conçois des créations Rich Media interactives haut de gamme, y compris l'optimisation créative dynamique (DCO) qui s'adapte instantanément aux spectateurs. Mes conceptions sont axées sur la performance, le référencement (SEO) et les transitions parfaites.",
     
     projectsTitle: "Projets Vedettes",
-    projectsSub: "Cliquez sur 'Simuler' sur n'importe quel projet pour interagir avec un aperçu en direct directement dans les cadres d'appareils !",
+    projectsSub: "Explorez des simulations en direct et des aperçus interactifs de mon travail ci-dessous. Ajustez les contrôles de largeur pour tester la réactivité en temps réel.",
     projectsFilterAll: "Tous",
     projectsFilterWeb: "Applications Web",
     projectsFilterRich: "Publicités Rich Media",
