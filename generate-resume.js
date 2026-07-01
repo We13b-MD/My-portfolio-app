@@ -21,7 +21,7 @@ const email = 'idundunmd13@gmail.com';
 const part2 = '  |  ';
 const github = 'github.com/We13b-MD';
 const part3 = '  |  ';
-const portfolio = 'my-portfolio-app-seven-mu.vercel.app';
+const portfolio = 'michaelidundun.vercel.app';
 
 const totalWidth = 
   doc.widthOfString(part1) + 
@@ -38,7 +38,7 @@ doc.fillColor(TEXT_MUTED).text(part1, startX, doc.y, { continued: true })
    .fillColor(TEXT_MUTED).text(part2, { link: null, continued: true })
    .fillColor(ACCENT_COLOR).text(github, { link: 'https://github.com/We13b-MD', continued: true })
    .fillColor(TEXT_MUTED).text(part3, { link: null, continued: true })
-   .fillColor(ACCENT_COLOR).text(portfolio, { link: 'https://my-portfolio-app-seven-mu.vercel.app/' });
+   .fillColor(ACCENT_COLOR).text(portfolio, { link: 'https://michaelidundun.vercel.app/' });
 doc.moveDown(1);
 
 // Helper for section titles
