@@ -134,6 +134,7 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
 
       {/* Device Simulation View Frame */}
       <div
+        className="device-simulation-frame"
         style={{
           width: '100%',
           maxWidth: `${customWidth}px`,
@@ -154,6 +155,7 @@ export default function Simulator({ projectId, language }: SimulatorProps) {
       >
         {/* Device screen area (Guided Sandbox renders here) */}
         <div
+          className="device-screen-area"
           style={{
             flex: 1,
             background: '#121212',

@@ -626,6 +626,13 @@ button, input, textarea, select {
   transform: translateY(-2px);
 }
 
+.project-card-left {
+  order: 2;
+}
+.project-card-right {
+  order: 1;
+}
+
 @media (min-width: 1250px) {
   .project-large-card {
     flex-direction: row;
@@ -634,6 +641,7 @@ button, input, textarea, select {
   .project-card-left {
     flex: 1.2;
     min-width: 0;
+    order: 1;
   }
   .project-card-right {
     flex: 1;
@@ -641,6 +649,7 @@ button, input, textarea, select {
     flex-direction: column;
     justify-content: space-between;
     padding-left: 12px;
+    order: 2;
   }
 }
 
@@ -752,3 +761,21 @@ button, input, textarea, select {
   }
 }
 
+@media (max-width: 1024px) {
+  /* Prevent scroll hijacking by passing touch scroll events through the interactive previews */
+  .device-screen-area {
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide resizing width slider and presets on mobile since physical screens cannot resize */
+  .preview-resize-btns,
+  .preview-slider-container {
+    display: none !important;
+  }
+  .preview-controls-bar {
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+}
