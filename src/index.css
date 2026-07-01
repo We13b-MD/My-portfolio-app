@@ -593,6 +593,15 @@ button, input, textarea, select {
     width: 50px;
     height: 50px;
   }
+
+  /* Responsive layout padding reductions to prevent squeezed visuals on actual mobile phones */
+  .layout-grid {
+    padding: 0 10px !important;
+  }
+
+  .glass-card {
+    padding: 14px !important;
+  }
 }
 
 /* ==========================================
